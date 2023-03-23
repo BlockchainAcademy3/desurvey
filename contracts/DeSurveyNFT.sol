@@ -50,7 +50,8 @@ contract DeSurveyNFT is ERC721 {
 
     constructor(
         uint256 _level,
-        uint256 _price
+        uint256 _price,
+        uint256 _limit
     )
         ERC721(
             string.concat("DeSurveyNFT-Level", _level.toString()),
@@ -59,6 +60,7 @@ contract DeSurveyNFT is ERC721 {
     {
         level = _level;
         price = _price;
+        limit = _limit;
     }
 
     // ---------------------------------------------------------------------------------------- //
@@ -86,6 +88,14 @@ contract DeSurveyNFT is ERC721 {
         baseURI = _uri;
     }
 
+    function setLimit(uint256 _limit) external onlyFactory {
+        if (_limit < currentId) {
+            revert("DeSurveyNFT: Limit too low");
+        }
+
+        limit = _limit;
+    }
+
     // ---------------------------------------------------------------------------------------- //
     // ************************************ Main Functions ************************************ //
     // ---------------------------------------------------------------------------------------- //
@@ -102,6 +112,7 @@ contract DeSurveyNFT is ERC721 {
     function mint(
         address _to
     ) external payable onlyFactory returns (uint256 tokenId) {
+        require(currentId <= limit, "DesurveyNFT: Exceed limit");
         require(userTokenId[_to] == 0, "DesurveyNFT: Already minted");
 
         if (price > 0) {

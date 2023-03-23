@@ -118,11 +118,18 @@ contract DeSurveyNFTFactory is OwnableUpgradeable {
         IDeSurveyNFT(levelToNFTAddress[_level]).setBaseURI(_uri);
     }
 
+    function setLimit(uint256 _level, uint256 _limit) external onlyOwner {
+        IDeSurveyNFT(levelToNFTAddress[_level]).setLimit(_limit); 
+    }
+
     // ---------------------------------------------------------------------------------------- //
     // ************************************ Main Functions ************************************ //
     // ---------------------------------------------------------------------------------------- //
 
-    function createDeSurveyNFT(uint256 _price) external onlyOwner {
+    function createDeSurveyNFT(
+        uint256 _price,
+        uint256 _limit
+    ) external onlyOwner {
         uint256 level = ++currentLevel;
 
         require(
@@ -130,7 +137,9 @@ contract DeSurveyNFTFactory is OwnableUpgradeable {
             "DeSurveyNFTFactory: NFT already exists"
         );
 
-        address newDeSurveyNFT = address(new DeSurveyNFT(level, _price));
+        address newDeSurveyNFT = address(
+            new DeSurveyNFT(level, _price, _limit)
+        );
 
         levelToNFTAddress[level] = newDeSurveyNFT;
         levelToPrice[level] = _price;

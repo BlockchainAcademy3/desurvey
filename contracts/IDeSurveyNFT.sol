@@ -8,4 +8,6 @@ interface IDeSurveyNFT {
     function burn(address user) external;
 
     function setBaseURI(string memory baseURI) external;
+
+    function setLimit(uint256 limit) external;
 }
