@@ -3,7 +3,9 @@
 		"ProxyAdmin": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
 		"DeSurveyNFTFactory": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
 	},
-	"bnbtest": {},
+	"bnbtest": {
+		"DeSurveyNFTFactory": "0x23d0cddC1Ea9Fcc5CA9ec6b5fC77E304bCe8d4c3"
+	},
 	"bnb": {},
 	"eth": {}
 }

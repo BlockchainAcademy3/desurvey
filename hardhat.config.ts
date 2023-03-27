@@ -2,6 +2,7 @@ import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 
 import "hardhat-deploy";
+import "./task";
 
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -35,10 +36,10 @@ const config: HardhatUserConfig = {
     },
     bnbtest: {
       url: process.env.BNBTest_URL,
-      accounts: {
-        mnemonic: process.env.BNBTest_MNEMONIC,
-        count: 10,
-      },
+      accounts:
+        process.env.BNBTest_PRIVATE_KEY !== undefined
+          ? [process.env.BNBTest_PRIVATE_KEY]
+          : [],
     },
     bnb: {
       url: process.env.BNB_URL,

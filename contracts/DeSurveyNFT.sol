@@ -44,6 +44,9 @@ contract DeSurveyNFT is ERC721 {
 
     event MintPriceChanged(uint256 oldPrice, uint256 newPrice);
 
+    event Mint(address indexed user, uint256 tokenId);
+    event Burn(address indexed user, uint256 tokenId);
+
     // ---------------------------------------------------------------------------------------- //
     // ************************************* Constructor ************************************** //
     // ---------------------------------------------------------------------------------------- //
@@ -89,9 +92,7 @@ contract DeSurveyNFT is ERC721 {
     }
 
     function setLimit(uint256 _limit) external onlyFactory {
-        if (_limit < currentId) {
-            revert("DeSurveyNFT: Limit too low");
-        }
+        require(_limit >= currentId, "DeSurveyNFT: Limit too low");
 
         limit = _limit;
     }
@@ -127,6 +128,8 @@ contract DeSurveyNFT is ERC721 {
 
         // Record the token id
         userTokenId[_to] = tokenId;
+
+        emit Mint(_to, tokenId);
     }
 
     /**
@@ -143,5 +146,7 @@ contract DeSurveyNFT is ERC721 {
 
         // Delete the record
         userTokenId[_to] = 0;
+
+        emit Burn(_to, _tokenId);
     }
 }

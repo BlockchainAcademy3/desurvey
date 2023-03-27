@@ -3,13 +3,6 @@ import { DeployFunction } from "hardhat-deploy/types";
 
 import { readAddressList, storeAddressList } from "../scripts/contractAddress";
 
-// Deploy Proxy Admin
-// It is a non-proxy deployment
-// Contract:
-//    - ProxyAdmin
-// Tags:
-//    - ProxyAdmin
-
 const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deployments, getNamedAccounts, network } = hre;
   const { deploy } = deployments;
