@@ -41,6 +41,13 @@ const config: HardhatUserConfig = {
           ? [process.env.BNBTest_PRIVATE_KEY]
           : [],
     },
+    sepolia: {
+      url: process.env.Sepolia_URL,
+      accounts:
+        process.env.Sepolia_PRIVATE_KEY !== undefined
+          ? [process.env.Sepolia_PRIVATE_KEY]
+          : [],
+    },
     bnb: {
       url: process.env.BNB_URL,
       accounts:

@@ -8,5 +8,9 @@
 		"DeSurveyNFTFactory": "0x007a978861b169eCc8FB397dd875Ea246CBBF1dA"
 	},
 	"bnb": {},
-	"eth": {}
+	"eth": {},
+	"sepolia": {
+		"ProxyAdmin": "0x44c6C8326D64dbaA2F3F0f5d4F4Cf9a7d185Ce15",
+		"DeSurveyNFTFactory": "0x6e95Fc19611cebD936B22Fd1A15D53d98bb31dAF"
+	}
 }
