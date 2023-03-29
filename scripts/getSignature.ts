@@ -5,9 +5,11 @@ import { getLatestBlockTimestamp } from "./utils";
 dotenv.config();
 
 async function main() {
-  const privateKey = process.env.BNB_PRIVATE_KEY || "";
+  const privateKey = process.env.PRIVATE_KEY || "";
 
-  const signer = new ethers.Wallet(privateKey, ethers.provider);
+  const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_URL)
+
+  const signer = new ethers.Wallet(privateKey, provider);
 
   console.log("signer is ", signer.address);
 
@@ -18,7 +20,7 @@ async function main() {
 
   const level = 1;
 
-  const chainId = await ethers.provider.getNetwork().then((res) => res.chainId);
+  const chainId = await provider.getNetwork().then((res) => res.chainId);
 
   console.log("chainId is ", chainId);
 
@@ -37,7 +39,7 @@ async function main() {
     ],
   };
 
-  const validUntil = (await getLatestBlockTimestamp(ethers.provider)) + 10000;
+  const validUntil = (await getLatestBlockTimestamp(provider)) + 10000;
 
   const mintRequest = {
     user: userAddress,
